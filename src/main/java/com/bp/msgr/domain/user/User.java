@@ -1,12 +1,16 @@
 package com.bp.msgr.domain.user;
 
-import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.bp.msgr.domain.chat.Chat;
+import com.bp.msgr.domain.participantInfo.ParticipantInfo;
+import com.bp.msgr.domain.visit.Visit;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,14 +28,17 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uid;
+	private Long user_id;
 	
 	private String name;
 	private String email;
 	
-	@Column(name="last_time")
-	private Date lastVisitTime;
+	@OneToMany(mappedBy = "user")
+	private List<ParticipantInfo> infos;
 	
-//	@ManyToMany
-//	private ArrayList<Room> rooms;
+	@OneToMany(mappedBy = "sender")
+	private List<Chat> chats;
+	
+	@OneToMany(mappedBy = "visitor")
+	private List<Visit> visits;
 }

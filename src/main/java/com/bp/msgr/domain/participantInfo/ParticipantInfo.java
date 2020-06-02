@@ -1,6 +1,4 @@
-package com.bp.msgr.domain.chat;
-
-import java.time.LocalDateTime;
+package com.bp.msgr.domain.participantInfo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,28 +12,20 @@ import com.bp.msgr.domain.user.User;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-@Entity
-@Getter
 @RequiredArgsConstructor
-@Setter
-public class Chat {
-
+@Getter
+@Entity
+public class ParticipantInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long chat_id;
-	
-	private String msg;
+	private Long info_id;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User sender;
+	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "room_id")
 	private Room room;
-	
-	private LocalDateTime time;
-	
 }

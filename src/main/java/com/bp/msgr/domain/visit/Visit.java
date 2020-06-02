@@ -1,30 +1,39 @@
 package com.bp.msgr.domain.visit;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.bp.msgr.domain.room.Room;
+import com.bp.msgr.domain.user.User;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Getter
+@RequiredArgsConstructor
 public class Visit {
-	
+//	
 	@Id
-	@Column(name="uid")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long uid;
+	private Long visit_id;
 	
-	private Date time;
+	private LocalDateTime time;
 	
-	@Column(name="visitor_id")
-	private Long visitorId;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User visitor;
 	
-	@Column(name="room_id")
-	private Long roomId;
+	
+	@ManyToOne
+	@JoinColumn(name = "room_id")
+	private Room room;
 	
 }
