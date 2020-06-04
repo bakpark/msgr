@@ -9,10 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.bp.msgr.domain.chat.Chat;
 import com.bp.msgr.domain.participantInfo.ParticipantInfo;
 import com.bp.msgr.domain.visit.Visit;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -38,15 +36,13 @@ public class User {
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "user")
+	@Builder.Default
 	private List<ParticipantInfo> roomInfo = new ArrayList<>();
-	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "sender")
-	private List<Chat> chats;
-	
+		
 	@JsonManagedReference
 	@OneToMany(mappedBy = "visitor")
-	private List<Visit> visits;
+	@Builder.Default
+	private List<Visit> visits = new ArrayList<>();
 
 	public void addRoomInfo(ParticipantInfo info) {
 		roomInfo.add(info);

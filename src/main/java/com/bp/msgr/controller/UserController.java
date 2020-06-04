@@ -20,11 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	private final UserService userService;
-	
-//	@GetMapping(value="/get/{user_id}")
-//	public Optional<User> get(@PathVariable(name = "user_id")Long userId){
-//		return userService.get(userId);
-//	}
+
 	@GetMapping(value = "/get")
 	public User get(Long userId) {
 		return userService.get(userId);

@@ -18,11 +18,6 @@ public class RoomService {
 		return roomRepo.getOne(roomId);
 	}
 
-//  not used 2020-06-05	
-//	public Room create(RoomRequestDto dto) {
-//		return roomRepo.save(dto.toEntity());
-//	}
-	
 	public Room create(String roomName) {
 		return roomRepo.save(new Room(roomName));
 	}

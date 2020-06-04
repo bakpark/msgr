@@ -36,22 +36,32 @@ public class Room {
 	
 	public Room(String roomName) {
 		name = roomName;
+		userInfos = new ArrayList<>();
+		chats = new ArrayList<>();
+		visits = new ArrayList<>();
 	}
 
 	@JsonManagedReference
 	@OneToMany(mappedBy="room")
+	@Builder.Default
 	private List<ParticipantInfo> userInfos = new ArrayList<>();
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy="room")
-	private List<Chat> chats;
+	@Builder.Default
+	private List<Chat> chats = new ArrayList<>();
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy="room")
-	private List<Visit> visits;
+	@Builder.Default
+	private List<Visit> visits = new ArrayList<>();
 
 	public void addUserInfo(ParticipantInfo info) {
 		userInfos.add(info);
+	}
+
+	public void addChat(Chat chat) {
+		chats.add(chat);
 	}
 
 }

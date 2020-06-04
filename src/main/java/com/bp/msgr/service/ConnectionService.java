@@ -28,13 +28,11 @@ public class ConnectionService {
 								.user(user)
 								.room(room)
 								.build();
+		
 		infoRepo.save(info);
 		user.addRoomInfo(info);
 		room.addUserInfo(info);
 		
-		// need?
-		userRepo.save(user);
-		roomRepo.save(room);
 		
 		return info;
 	}
