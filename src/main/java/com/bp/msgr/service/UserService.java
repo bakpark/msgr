@@ -1,7 +1,6 @@
 package com.bp.msgr.service;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -16,19 +15,15 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 	private final UserRepository userRepository;
 	
-	public Optional<User> get(Long userId){
-		return userRepository.findById(userId);
+	public User get(Long userId){
+		return userRepository.getOne(userId);
 	}
 	
 	public User create(UserRequestDto dto) {
 		return userRepository.save(dto.toEntity());
 	}
-//	
-//	public User update(UserRequestDto dto) {
-//		return userRepo.save(dto.toEntity());
-//	}
 	
-	public ArrayList<User> getAll(){
-		return (ArrayList<User>) userRepository.findAll();
+	public List<User> getAll(){
+		return userRepository.findAll();
 	}
 }
