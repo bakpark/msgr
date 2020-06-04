@@ -1,0 +1,15 @@
+1. Entity 에 @NoArgsConstructor 빠진 경우 (2020-06-05)
+  - java source상 문제 없음
+  - but DB에서 만들 때 아마 기본 생성자로 생성하는 듯
+  - 비슷한 issue로 DTO의 constructor도 에러를 발생시켰는데,
+  - httpRequest가 만들어지는 시점에 DTO에 데이터를 binding할 때
+  - 기본 constructor로 생성하는 듯 싶다.
+  => httpRequest에 사용되는 DTO & Entity 에는 @NoArgsConstructor를 항상 붙이도록
+
+2. Entity -> json 변환 시 property 중 null 값이 존재하는 경우 (2020-06-05)
+  - jackson 을 통해 object를 parsing하는 경우
+  - object의 filed 값이 null (초기화 안함) 이면 에러를 발생시킴
+  => (1) 초기화를 잘 해준다.
+       (2) application.properties에 다음 한 줄을 추가해주면 됨
+          spring.jackson.serialization.fail-on-empty-beans=false
+
