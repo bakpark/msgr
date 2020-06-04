@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import com.bp.msgr.domain.room.Room;
 import com.bp.msgr.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +25,11 @@ public class ParticipantInfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long infoId;
 	
+	@JsonBackReference
 	@ManyToOne(targetEntity = User.class)
 	private User user;
 	
+	@JsonBackReference
 	@ManyToOne(targetEntity = Room.class)
 	private Room room;
 }

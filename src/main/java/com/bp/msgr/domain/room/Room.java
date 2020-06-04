@@ -42,9 +42,11 @@ public class Room {
 	@OneToMany(mappedBy="room")
 	private List<ParticipantInfo> userInfos = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="room")
 	private List<Chat> chats;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="room")
 	private List<Visit> visits;
 

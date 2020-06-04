@@ -13,6 +13,7 @@ import com.bp.msgr.domain.chat.Chat;
 import com.bp.msgr.domain.participantInfo.ParticipantInfo;
 import com.bp.msgr.domain.visit.Visit;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,13 +36,15 @@ public class User {
 	private String name;
 	private String email;
 	
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user")
 	private List<ParticipantInfo> roomInfo = new ArrayList<>();
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "sender")
 	private List<Chat> chats;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "visitor")
 	private List<Visit> visits;
 
