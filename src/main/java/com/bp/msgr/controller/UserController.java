@@ -1,7 +1,8 @@
 package com.bp.msgr.controller;
 
-import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +21,10 @@ import lombok.RequiredArgsConstructor;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value="api/v1/user")
+@RequestMapping(value = "api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
-	
+
 	private final UserService userService;
 
 	@GetMapping(value = "/get")
@@ -32,15 +33,30 @@ public class UserController {
 		ResponseEntity<User> response = new ResponseEntity<>(user, HttpStatus.OK);
 		return response;
 	}
-	
-	@GetMapping(value="/getAll")
-	public List<User> getAll(){
-		return userService.getAll();
+
+	@GetMapping(value = "/find")
+	public ResponseEntity<User> find(String name, String email) {
+		ResponseEntity<User> response = null;
+		UserRequestDto dto = UserRequestDto.builder().name(name).email(email).build();
+		try {
+			User user = userService.find(dto).orElseThrow();
+			response = new ResponseEntity<>(user, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return response;
 	}
-	
+
+	@GetMapping(value = "/getAll")
+	public ResponseEntity<List<User>> getAll() {
+		List<User> list = userService.getAll();
+		ResponseEntity<List<User>> response = new ResponseEntity<>(list, HttpStatus.OK);
+		return response;
+	}
+
 	@PostMapping(value = "/create")
 	public User create(@RequestBody UserRequestDto dto) {
 		return userService.create(dto);
 	}
-	
+
 }
