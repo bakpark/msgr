@@ -59,10 +59,15 @@ export default {
   methods: {
     onClickRegister() {
       console.log('on click register', this.id, this.email)
-      console.log(this.$axios)
+      this.$axios.get('/room/getAll').then((response) => {
+        console.log(response)
+      })
     },
     onClickLogin() {
       console.log('on click login', this.id, this.email)
+      this.$axios.get('/user/getAll').then((response) => {
+        console.log(response)
+      })
     }
 
   }
