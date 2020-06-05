@@ -13,7 +13,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.bp.msgr.domain.room.Room;
 import com.bp.msgr.domain.user.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,7 +44,7 @@ public class Chat {
 	private User sender;
 	
 	// 1:N 관계, Room에서도 관리 할 것
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToOne(targetEntity = Room.class)
 	private Room room;
 	
