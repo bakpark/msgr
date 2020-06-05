@@ -7,24 +7,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.bp.msgr.domain.room.Room;
+import com.bp.msgr.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Visit {
-	
+//	
 	@Id
-	@Column(name="uid")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long uid;
+	private Long vistId;
+
+	@Column(name = "visit_at", nullable = false, updatable = false)
+	@CreationTimestamp
+	private Date visitAt;
 	
-	private Date time;
 	
-	@Column(name="visitor_id")
-	private Long visitorId;
+	@JsonManagedReference
+	@ManyToOne(targetEntity = User.class)
+	private User visitor;
 	
-	@Column(name="room_id")
-	private Long roomId;
+	@JsonManagedReference
+	@ManyToOne(targetEntity = Room.class)
+	private Room room;
 	
 }
