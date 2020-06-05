@@ -1,5 +1,5 @@
 # Abot msgr
-Interactive realtime messanger !
+Interactive realtime messenger !
 It is aiming to WEB version of KAKAO TALK
 
 
