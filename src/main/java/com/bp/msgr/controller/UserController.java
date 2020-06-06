@@ -2,7 +2,6 @@ package com.bp.msgr.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +56,28 @@ public class UserController {
 	@PostMapping(value = "/create")
 	public User create(@RequestBody UserRequestDto dto) {
 		return userService.create(dto);
+	}
+
+	@PostMapping(value = "/register")
+	public ResponseEntity<User> register(@RequestBody UserRequestDto dto) {
+		ResponseEntity<User> response = null;
+		if (canRegisterUser(dto)) {
+			User user = userService.create(dto);
+			response = new ResponseEntity<>(user, HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return response;
+
+	}
+
+	private boolean canRegisterUser(UserRequestDto dto) {
+		try {
+			userService.find(dto).orElseThrow();
+			return false;
+		} catch (NoSuchElementException e) {
+			return true;
+		}
 	}
 
 }
