@@ -58,15 +58,33 @@ export default {
   *****************************************************************/
   methods: {
     onClickRegister() {
-      console.log('on click register', this.id, this.email)
-      this.$axios.get('/room/getAll').then((response) => {
-        console.log(response)
+      let param = {
+        name: this.id,
+        email: this.email
+      }
+      this.$axios.post('user/register', param)
+      .then((response) => {
+          this.$store.status.userInfo = response.data
+          // Todo:
+          window.alert('register success')
+      })
+      .catch((err) => {
+        window.alert('fail', err)
       })
     },
     onClickLogin() {
-      console.log('on click login', this.id, this.email)
-      this.$axios.get('/user/getAll').then((response) => {
-        console.log(response)
+      let param = {
+        name: this.id,
+        email: this.email
+      }
+      this.$axios.post('user/find', param)
+      .then((response) => {
+        this.$store.status.userInfo = response.data
+        // Todo:
+        window.alert('login success')
+      })
+      .catch((err) => {
+        window.alert('fail', err)
       })
     }
 
