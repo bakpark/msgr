@@ -2,12 +2,22 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <!--<router-link to="/about">About</router-link>-->
+      <router-link to="/Main">Main</router-link> |
+      <router-link to="/TestRoom">Test Room</router-link>
     </div>
     <router-view />
+    <aside><Aside></Aside></aside>
   </div>
 </template>
-
+<script>
+import Aside from '@/components/Aside.vue'
+export default {
+  components: {
+    Aside: Aside
+  }
+  
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -28,5 +38,12 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+aside {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  font-style: italic;
 }
 </style>
