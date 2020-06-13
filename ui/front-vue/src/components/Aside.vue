@@ -1,6 +1,6 @@
 <template>
   <div class="Aside">
-    <div v-if="status === 'Login'">
+    <div v-if="state === 'HOME'">
         <tbody>
             <tr>
                 <th>No.</th>
@@ -16,6 +16,9 @@
             </tr>
         </tbody>
         <button style="border:solid 2px black;" @click="forceUpdate">Update</button>
+    </div>
+    <div v-else-if="state === 'MAIN'">
+      <span>MAIN</span>
     </div>
   </div>
 </template>
@@ -36,23 +39,24 @@ export default {
   },
   data() {
     return{
-        status: 'Login',
         userInfos: []
     }
   },
   
  /*****************************************************************
-  ********************** Computed, Whatched ***********************
+  ********************** computed, watch ***********************
   *****************************************************************/
-  Computed: {
+  computed: {
+    state() {
+      return this.$store.state.ASIDE
+    }
   },
-  Whatched: {
+  watch: {
   },
  /*****************************************************************
   ************************** Life-Cycle ***************************
   *****************************************************************/
   created() {
-      this.$store.aside = this
       this.forceUpdate()
   },
   mounted() {
@@ -81,5 +85,6 @@ export default {
 table, th, td {
     border: 1px solid black;
     padding: 3px;
+    background-color: darkgrey;
 }
 </style>

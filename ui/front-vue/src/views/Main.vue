@@ -1,19 +1,10 @@
 <template>
-  <div class="home">
-    <Login></Login>
+  <div class="main">
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
-import Login from '@/components/Login.vue'
 export default {
-  name: "Home",
-  components: {
-    Login
-  },
-
   /*****************************************************************
   ********************** computed, watch ***********************
   *****************************************************************/
@@ -27,14 +18,16 @@ export default {
   created() {
   },
   mounted() {
-    this.$store.commit('ASIDE_CHANGE', 'HOME')
+    this.$store.commit('ASIDE_CHANGE', 'MAIN')
   },
   beforeDestroy() {
   },
   destroyed() {
   },
-};
+  
+}
 </script>
+
 
 <style scoped>
 </style>

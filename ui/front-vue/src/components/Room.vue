@@ -1,19 +1,26 @@
 <template>
-  <div class="home">
-    <Login></Login>
+  <div class="room">
+    
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
-import Login from '@/components/Login.vue'
-export default {
-  name: "Home",
-  components: {
-    Login
-  },
 
+<script>
+/*****************************************************************
+ ************************** import *******************************
+ *****************************************************************/
+// import login from '@/Login.vue'
+
+export default {
+  name: "Room",
+  components: {
+  },
+  props: {
+  },
+  data() {
+    return{
+    }
+  },
   /*****************************************************************
   ********************** computed, watch ***********************
   *****************************************************************/
@@ -27,14 +34,20 @@ export default {
   created() {
   },
   mounted() {
-    this.$store.commit('ASIDE_CHANGE', 'HOME')
   },
   beforeDestroy() {
   },
   destroyed() {
   },
+ /*****************************************************************
+  ********************** User-Defined Methods *********************
+  *****************************************************************/
+  methods: {
+
+  }
 };
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
